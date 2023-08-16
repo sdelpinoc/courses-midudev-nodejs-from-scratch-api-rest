@@ -6,7 +6,7 @@ import express from 'express'
 import { validateMovie, validatePartialMovie } from './schemas/movies.js'
 
 // const movies = JSON.parse(readFileSync('./movies.json'))
-const movies = JSON.parse([
+const moviesJSON = `[
   {
     "id": "dcdd0fad-a94c-4810-8acc-5f108d3b18c3",
     "title": "The Shawshank Redemption",
@@ -19,7 +19,9 @@ const movies = JSON.parse([
     ],
     "rate": 9.3
   }
-])
+]`
+
+const movies = JSON.parse(moviesJSON)
 
 const app = express()
 app.disable('x-powered-by')

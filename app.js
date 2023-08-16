@@ -1,27 +1,27 @@
-import { readFileSync } from 'node:fs'
+import { readFile } from 'node:fs/promises'
 import crypto from 'node:crypto'
 
 import express from 'express'
 // import cors from 'cors'
 import { validateMovie, validatePartialMovie } from './schemas/movies.js'
 
-const movies = JSON.parse(readFileSync('data/movies.json'))
-// const moviesJSON = `[
-//   {
-//     "id": "dcdd0fad-a94c-4810-8acc-5f108d3b18c3",
-//     "title": "The Shawshank Redemption",
-//     "year": 1994,
-//     "director": "Frank Darabont",
-//     "duration": 142,
-//     "poster": "https://i.ebayimg.com/images/g/4goAAOSwMyBe7hnQ/s-l1200.webp",
-//     "genre": [
-//       "Drama"
-//     ],
-//     "rate": 9.3
-//   }
-// ]`
+// const movies = JSON.parse(readFile('./data/movies.json'))
+const moviesJSON = `[
+  {
+    "id": "dcdd0fad-a94c-4810-8acc-5f108d3b18c3",
+    "title": "The Shawshank Redemption",
+    "year": 1994,
+    "director": "Frank Darabont",
+    "duration": 142,
+    "poster": "https://i.ebayimg.com/images/g/4goAAOSwMyBe7hnQ/s-l1200.webp",
+    "genre": [
+      "Drama"
+    ],
+    "rate": 9.3
+  }
+]`
 
-// const movies = JSON.parse(moviesJSON)
+const movies = JSON.parse(moviesJSON)
 
 const app = express()
 app.disable('x-powered-by')

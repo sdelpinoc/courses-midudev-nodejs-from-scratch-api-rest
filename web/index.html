@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test API REST</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    main {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    article {
+      border: 1px solid #ccc;
+      padding: 1em;
+    }
+
+    img {
+      width: 300px;
+      max-width: 100%;
+    }
+
+    article h2,
+    article p {
+      max-width: 300px;
+      text-align: center;
+      text-overflow: clip;
+    }
+  </style>
+</head>
+<body>
+  <main></main>
+  <script type="module">
+    fetch('http://localhost:4000/movies')
+      .then(res => res.json())
+      .then(movies => {
+        const html = movies.map(movie => {
+          return `
+            <article data-id="${movie.id}">
+              <img src="${movie.poster}" />
+              <h2>${movie.title}</h2>
+              <p>${movie.director}</p>
+              <button>Delete</button>
+            </article>
+          `
+        }).join('')
+
+        document.querySelector('main').innerHTML = html
+
+        const buttons = document.querySelectorAll('button')
+
+        buttons.forEach(button => {
+          button.addEventListener('click', ({ target }) => {
+            const article = target.closest('[data-id]')
+            const id = article.dataset.id
+
+            fetch(`http://localhost:4000/movies/${id}`, {
+              method: 'DELETE'
+            })
+              .then(res => {
+                console.log(res)
+                if (res.ok) {
+                  article.remove()
+                }
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          })
+        })
+      })
+
+  </script>
+</body>
+</html>

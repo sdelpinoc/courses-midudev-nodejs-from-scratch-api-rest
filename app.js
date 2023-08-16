@@ -5,7 +5,7 @@ import express from 'express'
 // import cors from 'cors'
 import { validateMovie, validatePartialMovie } from './schemas/movies.js'
 
-const movies = JSON.parse(readFileSync('./data/movies.json'))
+const movies = JSON.parse(readFileSync('data/movies.json'))
 // const moviesJSON = `[
 //   {
 //     "id": "dcdd0fad-a94c-4810-8acc-5f108d3b18c3",

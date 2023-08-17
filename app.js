@@ -4,11 +4,16 @@ import express from 'express'
 // import cors from 'cors'
 import { validateMovie, validatePartialMovie } from './schemas/movies.js'
 import path from 'node:path';
-import { readFileSync } from 'node:fs';
 
-const file = path.join(process.cwd(), 'data', 'movies.json');
-// console.log(file)
-const movies = JSON.parse(readFileSync(file))
+// import { readFileSync } from 'node:fs';
+// const file = path.join(process.cwd(), 'data', 'movies.json');
+// // console.log(file)
+// const movies = JSON.parse(readFileSync(file))
+
+import { createRequire } from 'node:module'
+const require = createRequire(import.meta.url)
+const movies = require('./data/movies.json')
+
 // const moviesJSON = `[
 //   {
 //     "id": "dcdd0fad-a94c-4810-8acc-5f108d3b18c3",
